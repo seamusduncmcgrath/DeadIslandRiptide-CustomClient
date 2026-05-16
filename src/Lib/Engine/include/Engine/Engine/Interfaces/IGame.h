@@ -1,0 +1,108 @@
+#pragma once
+#include <Windows.h>
+#define ENGINE_API __declspec(dllexport)
+
+class ILevel;
+class IGame
+{
+public:
+	ENGINE_API int Initialize(char* lpCmdLine, int nCmdShow, HICON icon, unsigned long dwRunMode, unsigned long dwTimeout);// Offset=0x0 Size=0xd
+	ENGINE_API void OnPaint();// Offset=0x0 Size=0xd
+	ENGINE_API void WaitForPipelineThreads();
+	virtual void SetEngineObject();//( CGSObject*);
+	virtual ~IGame();
+	virtual void OnPreInitialize( const char**, int);
+	virtual void OnInitialize();
+	virtual void OnValidateSettings();
+	virtual void OnRendererInitialized();
+	virtual void OnTakeScreenShot();//( const ttl::string_base<char>*);
+	virtual void OnWindowActivate( bool);
+	virtual void OnStorageDeviceChanged();
+	virtual void OnReadErrorException();
+	virtual void OnStorageDeviceSelectionCompleted( bool);
+	virtual void OnContentChanged();
+	virtual void OnFinishedLoadingLevelEditor();//( const ttl::string_base<char>*);
+	virtual void GatherGameResources();//( ttl::list<ttl::string_base<char>, ttl::allocator>*, EGatherGameResourcesMode::TYPE);
+	virtual void OnPreLoadLevelInGIEMode( const char*);
+	virtual void OnPostLoadLevelInGIEMode( const char*);
+	virtual void OnPreDestroyLevelInGIEMode( const char*);
+	virtual void OnPostDestroyLevelInGIEMode( const char*);
+	virtual void OnNetworkCableUnplugged();
+	virtual void OnSignInChanged();
+	virtual void OnSystemUIOpened();
+	virtual void OnSystemUIClosed();
+	virtual bool IsSystemUIShowing();
+	virtual void OnSignInResult( int);
+	virtual void OnLiveConnectionChanged( HRESULT);
+	virtual void OnWriteProfileError( void*, bool);
+	virtual void OnWriteProfileSuccess( void*);
+	virtual void OnWriteProfileStartAsync( void*);
+	virtual void OnWriteProfileStopAsync( void*);
+	virtual void OnWriteProfileCancelAsync( void*);
+	virtual void OnProfileNotOwner();
+	virtual void OnAchievementWritten( unsigned int);
+	virtual void OnAchievementsReloaded();
+	virtual void ShowNetworkWaitScreen( bool);
+	virtual const char*  GetGameDirectoryName();
+	virtual void GetInvokeScriptPathEditor();//ttl::string_base<char>*  GetInvokeScriptPathEditor( ttl::string_base<char>* result);
+	virtual ILevel*  GetLevelEditor();
+	virtual const char*  GetVoiceLocaleID();
+	virtual bool VoiceChat_SetTalkWithEveryone( bool);
+	virtual void GetLiveSpaData();	//ILiveSpaData*  GetLiveSpaData();
+	virtual void GetSaveDataUtilityContext();//( SSaveDataUtilityContext*);
+	virtual void OnDeleteSaveGameUtilityFinished();
+	virtual void OnProfileLoaded( bool);
+	virtual void OnProfileUnloaded();
+	virtual bool IsStartButtonPairedWithA();
+	virtual bool IsBackButtonPairedWithB();
+	virtual void OnNetworkGameDestroyed();
+	virtual void OnBlockInputProcessing();
+	virtual void OnUnblockInputProcessing();
+	virtual int Main();
+	virtual void NonInteractiveSequenceBegin();
+	virtual void NonInteractiveSequenceEnd();
+	virtual void RestartTimeoutTimer();
+	virtual bool OnDemoTimeoutPassed();
+	virtual void OnNetworkError();//( ENetErrorTypes::TYPE, const ttl::string_base<char>*);
+	virtual void OnReplLocalIdChanged( unsigned __int16, unsigned __int16);
+	virtual void OnReplTargetJoined( unsigned __int16, unsigned int);
+	virtual void OnReplTargetLeft( unsigned __int16, unsigned int);
+	virtual void OnMsgReceived( unsigned int, const unsigned __int8*, unsigned int);
+	virtual void OnLobbyRemotePeerJoined( unsigned int);
+	virtual void OnLobbyRemotePeerLeft();//( unsigned int, EDisconnectReason::TYPE);
+	virtual void OnLobbyRemotePeerStartedJoining( unsigned int);
+	virtual void OnLobbyRemotePeerFailedJoining( unsigned int);
+	virtual void OnLobbyJoined();
+	virtual void OnLobbyLeft();//( EDisconnectReason::TYPE);
+	virtual void OnLobbySessionCreateFailure();//( ELobbyMode::TYPE, EDisconnectReason::TYPE);
+	virtual void OnLobbySessionCreateSuccess();//( ELobbyMode::TYPE);
+	virtual void OnLobbyBecameMaster();
+	virtual void GetProperFont();//ttl::string_base<char>*  GetProperFont( ttl::string_base<char>* result, const ttl::string_base<char>*);
+	virtual float GetProperFontScale();//( const ttl::string_base<char>*, float, bool);
+	virtual void GetDefaultFont();//ttl::string_base<char>*  GetDefaultFont( ttl::string_base<char>* result);
+	virtual void OnBubbleEnter();// (const ttl::string_base<char>*);
+	virtual void OnBubbleLeave();// (const ttl::string_base<char>*);
+	virtual void OnPostResetRenderer();
+	virtual void GetGamescriptUIVersion(); //ttl::string_base<char>* GetGamescriptUIVersion(ttl::string_base<char>* result);
+	virtual void GetSaveManager();//ISaveManager* GetSaveManager();
+	virtual bool IsNetPlayerPlaying( int);
+	virtual void ForceProgressDialogTimeoutReset();
+	virtual void GetTagSystem();//ITagSystem*  GetTagSystem();
+	virtual bool Lobby_IsGameVisibleByScannerThread();
+	virtual void Lobby_IsGameJoinableThread();//EDisconnectReason::TYPE Lobby_IsGameJoinableThread();
+	virtual void LobbyCallback_OnBecomeMaster();
+	virtual void Lobby_OnCreateInternetSessionFailed();
+	virtual void Lobby_OnInviteReceived();//( const SGameSearchResult*, bool, SPlayerId, unsigned int);
+	virtual void Lobby_OnInviteAccepted();//( const SGameSearchResult*, bool, SPlayerId, unsigned int);
+	virtual void Lobby_OnInviteRejected();//( const SGameSearchResult*, EInviteRejectReason::TYPE);
+	virtual void Lobby_OnFailedSignInForInviteAsync( bool);
+	virtual void GetDataCollector();//ChromeSpy::IDataCollector*  GetDataCollector();
+	virtual struct IDialogManager*  GetDialogManager();
+	virtual struct IQuestManager*  GetIQuestManager();
+	virtual void SetXbox360TitleId( int);
+	virtual void SetPS3TitleId( char*, int);
+	virtual bool BlockRpackOperationsByPendingPackUiOperations();
+	virtual void OnShowKeyboardUIXBox();//( mpl::_MPLOVERLAPPED**, IGSObject*, wchar_t**);
+	virtual void SetVMWorkSize( unsigned int);
+	virtual void FlushVM();
+};
